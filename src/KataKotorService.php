@@ -2,44 +2,68 @@
 
 namespace OmAlie\KataKotor;
 
+use Illuminate\Support\Facades\Config;
+
 class KataKotorService
 {
-    protected array $instances = [];
+    /**
+     * Daftar bahasa yang digunakan untuk pengecekan kata-kata kotor.
+     *
+     * @var array
+     */
+    protected $languages;
 
+    /**
+     * Konstruktor untuk mendeteksi dan memuat bahasa.
+     *
+     * @param array $languages
+     */
     public function __construct(array $languages)
     {
-        foreach ($languages as $langClass) {
-            if (class_exists($langClass)) {
-                $keywords = $langClass::keywords();
-                $this->instances[$langClass] = new KataKotor($keywords);
-            }
-        }
+        $this->languages = $languages;
     }
 
-    public function hasBadwords(string $text, string $lang = null): bool
+    /**
+     * Fungsi untuk mengecek apakah sebuah kata termasuk kata kotor.
+     *
+     * @param string $word
+     * @return bool
+     */
+    public function isKataKotor(string $word): bool
     {
-        foreach ($this->instances as $instance) {
-            if ($instance->contains($text, $lang)) {
+        foreach ($this->languages as $language) {
+            $languageInstance = new $language;
+
+            // Mengecek apakah kata ada di dalam bahasa yang di-load
+            if ($languageInstance->isKataKotor($word)) {
                 return true;
             }
         }
+
         return false;
     }
 
-    public function getBadwords(string $text, string $lang = null): array
+    /**
+     * Mendapatkan daftar bahasa yang di-load dari konfigurasi.
+     *
+     * @return array
+     */
+    public static function getLanguages(): array
     {
-        $found = [];
-        foreach ($this->instances as $instance) {
-            $found = array_merge($found, $instance->find($text, $lang));
-        }
-        return array_unique($found);
+        $defaultLanguage = Config::get('kata-kotor.default_language');
+        $additionalLanguages = Config::get('kata-kotor.additional_languages', []);
+
+        // Menyusun daftar bahasa
+        return array_merge([$defaultLanguage], $additionalLanguages);
     }
 
-    public function censorText(string $text, string $replacement = '****', string $lang = null): string
+    /**
+     * Fungsi untuk mendapatkan whitelist dari konfigurasi.
+     *
+     * @return array
+     */
+    public static function getWhitelist(): array
     {
-        foreach ($this->instances as $instance) {
-            $text = $instance->censor($text, $replacement);
-        }
-        return $text;
+        return Config::get('kata-kotor.whitelist', []);
     }
 }
