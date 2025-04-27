@@ -126,11 +126,12 @@ $hasEn = KataKotor::hasBadwords($message, 'en');
 
 - `resources/badwords/id.txt` (Bahasa Indonesia)
 - `resources/badwords/en.txt` (Bahasa Inggris)
-- `resources/badwords/id.txt` (Bahasa Jawa, Indonesia)
-- `resources/badwords/id.txt` (Bahasa Aceh, Indonesia)
+- `resources/badwords/id-jv.txt` (Bahasa Jawa, Indonesia)
+- `resources/badwords/id-ace.txt` (Bahasa Aceh, Indonesia)
 
 Isi `id.txt` dan `en.txt` dapat diperluas sesuai kebutuhan.
-
+#### Penambahan bahasa baru
+untuk menambah bahasa baru, tambahkan file bahasa di folder ini, dengan penamaan file bahasa mengikuti standar Internasional dengan format `BCP 47`
 ---
 
 ## License
@@ -144,7 +145,7 @@ MIT License — Bebas digunakan untuk projek pribadi maupun komersial.
 Pull request ditunggu untuk:
 
 - Menambahkan bahasa baru
-Penamaan file bahasa mengikuti standar internasional (BCP 47) standar (i18n). Contoh `id-ace` untuk Bahasa Aceh, atau `id-jv` untuk Bahasa Jawa.
+Penamaan file bahasa mengikuti standar internasional format `BCP 47`. Contoh `id-ace` untuk Bahasa Aceh, atau `id-jv` untuk Bahasa Jawa.
 - Memperluas daftar kata kotor
 - Perbaikan dan optimasi
 
