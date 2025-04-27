@@ -1,0 +1,34 @@
+{
+    "name": "omalie/kata-kotor",
+    "description": "Laravel badwords filter package (multi-language, production-ready)",
+    "keywords": ["laravel", "badwords", "filter", "censor", "kata kotor"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Om Alie Alidata",
+            "email": "emailrazali@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VendorName\\KataKotor\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VendorName\\KataKotor\\KataKotorServiceProvider"
+            ],
+            "aliases": {
+                "KataKotor": "VendorName\\KataKotor\\Facades\\KataKotor"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
