@@ -16,16 +16,16 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\KataKotor\\": "src/"
+            "OmAlie\\KataKotor\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\KataKotor\\KataKotorServiceProvider"
+                "OmAlie\\KataKotor\\KataKotorServiceProvider"
             ],
             "aliases": {
-                "KataKotor": "VendorName\\KataKotor\\Facades\\KataKotor"
+                "KataKotor": "OmAlie\\KataKotor\\Facades\\KataKotor"
             }
         }
     },
